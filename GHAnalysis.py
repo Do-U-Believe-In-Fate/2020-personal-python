@@ -76,6 +76,8 @@ class Data:
         with open('U_R_E.json', 'w', encoding='utf-8') as f:
             json.dump(self.__U_R_E, f)
 
+        return "Init Finish"
+
     # 读取json文件，按行拆分数据
     def one_file_read_in(self, f, dict_address):
         json_list = []
@@ -122,7 +124,7 @@ class Data:
             return self.__R_E[reponame].get(event, 0)
 
     # 查询用户——项目——事件
-    def gget_events_users_repos(self, username: str, reponame: str, event: str) -> int:
+    def get_events_users_repos(self, username: str, reponame: str, event: str) -> int:
         if not self.__U_E.get(username, 0):
             return 0
         elif not self.__U_R_E[username].get(reponame, 0):
@@ -161,7 +163,7 @@ class Run:
             if self.parser.parse_args().event:
                 if self.parser.parse_args().user:
                     if self.parser.parse_args().repo:
-                        res = self.data.gget_events_users_repos(
+                        res = self.data.get_events_users_repos(
                             self.parser.parse_args().user,
                             self.parser.parse_args().repo,
                             self.parser.parse_args().event
@@ -183,5 +185,5 @@ class Run:
         return res
 
 
-if __name__ == '__main__':
-    a = Run()
+if __name__ == "__main__":
+    Run()
